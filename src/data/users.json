@@ -1,0 +1,62 @@
+[
+    {
+        "id": 1,
+        "firstName": "John",
+        "middleName": "Doe",
+        "lastName": "Smith",
+        "email": "john.smith@example.com",
+        "phoneNumber": "555-555-5555",
+        "role": "Admin",
+        "address": "123 Main St"
+    },
+    {
+        "id": 2,
+        "firstName": "Jane",
+        "middleName": "Elizabeth",
+        "lastName": "Doe",
+        "email": "jane.doe@example.com",
+        "phoneNumber": "555-555-5556",
+        "role": "SuperAdmin",
+        "address": "456 Elm St"
+    },
+    {
+        "id": 3,
+        "firstName": "Bob",
+        "middleName": "J.",
+        "lastName": "Johnson",
+        "email": "bob.johnson@example.com",
+        "phoneNumber": "555-555-5557",
+        "role": "Subscriber",
+        "address": "789 Oak St"
+    },
+    {
+        "id": 4,
+        "firstName": "Sarah",
+        "middleName": "Lynn",
+        "lastName": "Wilson",
+        "email": "sarah.wilson@example.com",
+        "phoneNumber": "555-555-5558",
+        "role": "Subscriber",
+        "address": "987 Maple St"
+    },
+    {
+        "id": 5,
+        "firstName": "Tom",
+        "middleName": "B.",
+        "lastName": "Davis",
+        "email": "tom.davis@example.com",
+        "phoneNumber": "555-555-5559",
+        "role": "Admin",
+        "address": "654 Pine St"
+    },
+    {
+        "id": 6,
+        "firstName": "Lisa",
+        "middleName": "Marie",
+        "lastName": "Garcia",
+        "email": "lisa.garcia@example.com",
+        "phoneNumber": "555-555-5560",
+        "role": "Subscriber",
+        "address": "321 Cedar St"
+    }
+]
