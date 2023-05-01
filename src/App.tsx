@@ -1,6 +1,6 @@
-import "./App.css";
-import UserTable from "./components/UserTable";
-import data from "./data/users.json";
+import './App.css';
+import UserTable from './components/UserTable/UserTable';
+import data from './data/users.json';
 
 function App() {
   return (

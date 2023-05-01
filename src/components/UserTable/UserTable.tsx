@@ -1,8 +1,8 @@
-import { useState } from "react";
-import { Role, User } from "../models/User";
-import "./UserTable.css";
+import {useState} from 'react';
+import {Role, User} from '../../models/User';
+import './UserTable.css';
 
-import UserRepository from "../repositories/User.repository";
+import UserRepository from '../../repositories/User.repository';
 import {
   TableRow,
   TableCell,
@@ -19,11 +19,11 @@ import {
   makeStyles,
   Theme,
   createStyles,
-  Box,
   Modal,
-  Typography,
-} from "@material-ui/core";
-import AddIcon from "@material-ui/icons/Add";
+  Box,
+} from '@material-ui/core';
+import AddIcon from '@material-ui/icons/Add';
+import AddUser from '../AddUser/AddUser';
 
 interface Props {
   usersData: any[];
@@ -32,7 +32,7 @@ interface Props {
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
     fab: {
-      position: "fixed",
+      position: 'fixed',
       bottom: theme.spacing(2),
       right: theme.spacing(2),
     },
@@ -40,21 +40,25 @@ const useStyles = makeStyles((theme: Theme) =>
       position: 'absolute',
       top: '50%',
       left: '50%',
+      textAlign: 'center',
+      alignItems: 'center',
+      backgroundColor: 'white',
       transform: 'translate(-50%, -50%)',
       width: 400,
-      bgcolor: 'white',
       border: '2px solid #000',
+      borderRadius: '24px',
       boxShadow: '24',
       p: 4,
-    }
-  })
+      paddingBottom: '20px',
+    },
+  }),
 );
 
-const UserTable: React.FC<Props> = ({ usersData }) => {
+const UserTable: React.FC<Props> = ({usersData}) => {
   const classes = useStyles();
   const [users, setUsers] = useState<User[]>([]);
   const [editingUserId, setEditingUserId] = useState<number | null>(null);
-  const [buttonText, setButtonText] = useState<string>("Load data");
+  const [buttonText, setButtonText] = useState<string>('Load data');
 
   const [open, setOpen] = useState(false);
   const handleOpen = () => setOpen(true);
@@ -64,7 +68,7 @@ const UserTable: React.FC<Props> = ({ usersData }) => {
 
   const handleLoadData = () => {
     setUsers(userRepository.getUsers());
-    setButtonText("Refresh data");
+    setButtonText('Refresh data');
   };
 
   const handleDelete = (id: number) => {
@@ -86,6 +90,12 @@ const UserTable: React.FC<Props> = ({ usersData }) => {
     setEditingUserId(null);
   };
 
+  const handleCreate = (newUser: User) => {
+    userRepository.createUser(newUser);
+    setOpen(false);
+    setUsers(userRepository.getUsers());
+  };
+
   const renderTableRow = (user: User) => {
     if (user.id === editingUserId) {
       return (
@@ -94,14 +104,14 @@ const UserTable: React.FC<Props> = ({ usersData }) => {
             <TextField
               type="text"
               value={user.firstName}
-              onChange={(e) =>
+              onChange={e =>
                 setUsers(
-                  users.map((u) => {
+                  users.map(u => {
                     if (u.id === user.id) {
                       u.firstName = e.target.value;
                     }
                     return u;
-                  })
+                  }),
                 )
               }
             />
@@ -109,15 +119,15 @@ const UserTable: React.FC<Props> = ({ usersData }) => {
           <TableCell className="table-data">
             <TextField
               type="text"
-              value={user.middleName || ""}
-              onChange={(e) =>
+              value={user.middleName || ''}
+              onChange={e =>
                 setUsers(
-                  users.map((u) => {
+                  users.map(u => {
                     if (u.id === user.id) {
                       u.middleName = e.target.value;
                     }
                     return u;
-                  })
+                  }),
                 )
               }
             />
@@ -126,14 +136,14 @@ const UserTable: React.FC<Props> = ({ usersData }) => {
             <TextField
               type="text"
               value={user.lastName}
-              onChange={(e) =>
+              onChange={e =>
                 setUsers(
-                  users.map((u) => {
+                  users.map(u => {
                     if (u.id === user.id) {
                       u.lastName = e.target.value;
                     }
                     return u;
-                  })
+                  }),
                 )
               }
             />
@@ -142,14 +152,14 @@ const UserTable: React.FC<Props> = ({ usersData }) => {
             <TextField
               type="text"
               value={user.email}
-              onChange={(e) =>
+              onChange={e =>
                 setUsers(
-                  users.map((u) => {
+                  users.map(u => {
                     if (u.id === user.id) {
                       u.email = e.target.value;
                     }
                     return u;
-                  })
+                  }),
                 )
               }
             />
@@ -158,14 +168,14 @@ const UserTable: React.FC<Props> = ({ usersData }) => {
             <TextField
               type="text"
               value={user.phone}
-              onChange={(e) =>
+              onChange={e =>
                 setUsers(
-                  users.map((u) => {
+                  users.map(u => {
                     if (u.id === user.id) {
                       u.phone = e.target.value;
                     }
                     return u;
-                  })
+                  }),
                 )
               }
             />
@@ -173,14 +183,14 @@ const UserTable: React.FC<Props> = ({ usersData }) => {
           <TableCell className="table-data">
             <Select
               value={user.role}
-              onChange={(e) =>
+              onChange={e =>
                 setUsers(
-                  users.map((u) => {
+                  users.map(u => {
                     if (u.id === user.id) {
                       u.role = e.target.value as Role;
                     }
                     return u;
-                  })
+                  }),
                 )
               }
             >
@@ -193,14 +203,14 @@ const UserTable: React.FC<Props> = ({ usersData }) => {
             <TextField
               type="text"
               value={user.address}
-              onChange={(e) =>
+              onChange={e =>
                 setUsers(
-                  users.map((u) => {
+                  users.map(u => {
                     if (u.id === user.id) {
                       u.address = e.target.value;
                     }
                     return u;
-                  })
+                  }),
                 )
               }
             />
@@ -259,10 +269,15 @@ const UserTable: React.FC<Props> = ({ usersData }) => {
                   <TableCell align="center">Actions</TableCell>
                 </TableRow>
               </TableHead>
-              <TableBody>{users.map((user) => renderTableRow(user))}</TableBody>
+              <TableBody>{users.map(user => renderTableRow(user))}</TableBody>
             </Table>
           </TableContainer>
-          <Fab color="primary" onClick={handleOpen} className={classes.fab} aria-label="add">
+          <Fab
+            color="primary"
+            onClick={handleOpen}
+            className={classes.fab}
+            aria-label="add"
+          >
             <AddIcon />
           </Fab>
           <Modal
@@ -272,12 +287,8 @@ const UserTable: React.FC<Props> = ({ usersData }) => {
             aria-describedby="modal-modal-description"
           >
             <Box className={classes.modal}>
-            <Typography id="modal-modal-title" variant="h6" component="h2">
-            Text in a modal
-          </Typography>
-          <Typography id="modal-modal-description">
-            Duis mollis, est non commodo luctus, nisi erat porttitor ligula.
-          </Typography>
+              <h2>Add User</h2>
+              <AddUser onSave={handleCreate} />
             </Box>
           </Modal>
         </>
