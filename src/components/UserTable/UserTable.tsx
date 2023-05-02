@@ -1,7 +1,5 @@
 import {useState} from 'react';
 import {Role, User} from '../../models/User';
-import './UserTable.css';
-
 import UserRepository from '../../repositories/User.repository';
 import {
   TableRow,
@@ -283,8 +281,7 @@ const UserTable: React.FC<Props> = ({usersData}) => {
           <Modal
             open={open}
             onClose={handleClose}
-            aria-labelledby="modal-modal-title"
-            aria-describedby="modal-modal-description"
+            disableEnforceFocus
           >
             <Box className={classes.modal}>
               <h2>Add User</h2>

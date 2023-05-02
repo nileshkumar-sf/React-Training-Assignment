@@ -1,6 +1,6 @@
 import {Button, LinearProgress} from '@mui/material';
 import {Formik, Form, Field} from 'formik';
-import {TextField} from 'formik-mui';
+import {Select, TextField} from 'formik-mui';
 import {User} from '../../models/User';
 import {MenuItem} from '@material-ui/core';
 
@@ -92,10 +92,10 @@ const AddUser: React.FC<Props> = ({onSave}) => {
           />
           <br />
           <br />
-          <Field component={TextField} type="select" name="role" label="Role">
-            <MenuItem value="red">Red</MenuItem>
-            <MenuItem value="green">Green</MenuItem>
-            <MenuItem value="blue">Blue</MenuItem>
+          <Field component={Select} name="role" label="Role" style={{width: '14.5rem', textAlign: 'left'}}>
+            <MenuItem value="SuperAdmin">SuperAdmin</MenuItem>
+            <MenuItem value="Admin">Subscriber</MenuItem>
+            <MenuItem value="Subscriber">Subscriber</MenuItem>
           </Field>
           <br />
           <br />
