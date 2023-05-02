@@ -278,11 +278,7 @@ const UserTable: React.FC<Props> = ({usersData}) => {
           >
             <AddIcon />
           </Fab>
-          <Modal
-            open={open}
-            onClose={handleClose}
-            disableEnforceFocus
-          >
+          <Modal open={open} onClose={handleClose} disableEnforceFocus>
             <Box className={classes.modal}>
               <h2>Add User</h2>
               <AddUser onSave={handleCreate} />

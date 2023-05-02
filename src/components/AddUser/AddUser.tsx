@@ -5,8 +5,13 @@ import {User} from '../../models/User';
 import {MenuItem} from '@material-ui/core';
 
 interface Values {
+  firstName: string;
+  middleName: string;
+  lastName: string;
   email: string;
-  password: string;
+  phoneNumber: string;
+  role: string;
+  address: string;
 }
 
 interface Props {
@@ -92,7 +97,12 @@ const AddUser: React.FC<Props> = ({onSave}) => {
           />
           <br />
           <br />
-          <Field component={Select} name="role" label="Role" style={{width: '14.5rem', textAlign: 'left'}}>
+          <Field
+            component={Select}
+            name="role"
+            label="Role"
+            style={{width: '14.5rem', textAlign: 'left'}}
+          >
             <MenuItem value="SuperAdmin">SuperAdmin</MenuItem>
             <MenuItem value="Admin">Subscriber</MenuItem>
             <MenuItem value="Subscriber">Subscriber</MenuItem>
