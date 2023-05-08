@@ -1,11 +1,13 @@
 import './App.css';
 import UserTable from './components/UserTable/UserTable';
-import data from './data/users.json';
+import ContextProvider from './context/userdata.context';
 
 function App() {
   return (
     <div className="App">
-      <UserTable usersData={data} />
+      <ContextProvider>
+        <UserTable />
+      </ContextProvider>
     </div>
   );
 }
