@@ -1,6 +1,5 @@
-import {useState} from 'react';
+import {useContext, useState} from 'react';
 import {Role, User} from '../../models/User';
-import UserRepository from '../../repositories/User.repository';
 import {
   TableRow,
   TableCell,
@@ -22,10 +21,7 @@ import {
 } from '@material-ui/core';
 import AddIcon from '@material-ui/icons/Add';
 import AddUser from '../AddUser/AddUser';
-
-interface Props {
-  usersData: any[];
-}
+import {UserDataContext} from '../../context/userdata.context';
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -52,7 +48,7 @@ const useStyles = makeStyles((theme: Theme) =>
   }),
 );
 
-const UserTable: React.FC<Props> = ({usersData}) => {
+const UserTable: React.FC = () => {
   const classes = useStyles();
   const [users, setUsers] = useState<User[]>([]);
   const [editingUserId, setEditingUserId] = useState<number | null>(null);
@@ -62,16 +58,16 @@ const UserTable: React.FC<Props> = ({usersData}) => {
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
 
-  const userRepository: UserRepository = new UserRepository(usersData);
+  const userRepository = useContext(UserDataContext);
 
   const handleLoadData = () => {
-    setUsers(userRepository.getUsers());
+    setUsers([...userRepository.getUsers()]);
     setButtonText('Refresh data');
   };
 
   const handleDelete = (id: number) => {
     userRepository.deleteUser(id);
-    setUsers(userRepository.getUsers());
+    setUsers([...userRepository.getUsers()]);
   };
 
   const handleEdit = (id: number) => {
@@ -81,7 +77,7 @@ const UserTable: React.FC<Props> = ({usersData}) => {
   const handleSave = (updatedUser: User) => {
     userRepository.updateUser(updatedUser);
     setEditingUserId(null);
-    setUsers(userRepository.getUsers());
+    setUsers([...userRepository.getUsers()]);
   };
 
   const handleCancel = () => {
@@ -91,7 +87,7 @@ const UserTable: React.FC<Props> = ({usersData}) => {
   const handleCreate = (newUser: User) => {
     userRepository.createUser(newUser);
     setOpen(false);
-    setUsers(userRepository.getUsers());
+    setUsers([...userRepository.getUsers()]);
   };
 
   const renderTableRow = (user: User) => {

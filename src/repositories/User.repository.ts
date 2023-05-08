@@ -37,7 +37,8 @@ class UserRepository implements IUserRepository<User> {
   }
 
   deleteUser(id: number) {
-    this.users.splice(id - 1, 1);
+    const index = this.users.findIndex(u => u.id === id);
+    this.users.splice(index, 1);
   }
 }
 
